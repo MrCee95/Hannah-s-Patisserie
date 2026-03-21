@@ -1,6 +1,6 @@
 # 🥐 Hannah's Patisserie | Artisanal Bakery OS (Kasoa)
 
-A high-performance, full-stack e-commerce engine built for a modern artisanal bakery and culinary school in Osu, Accra. This platform manages real-time inventory, secure administrative controls, and interactive baking masterclass bookings.
+A high-performance, fullstack e-commerce engine built for a modern artisanal bakery and culinary school in Kasoa, Ghana. This platform manages real-time inventory, secure administrative controls, and interactive baking masterclass bookings.
 
 ---
 
