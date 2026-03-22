@@ -57,6 +57,15 @@ ADMIN_PASSWORD=my_secure_password
 npm run dev
 ```
 
+🛡️ Security & Reliability
+
+    Webhook Verification: All Stripe pings are validated using stripe.webhooks.constructEvent.
+
+    Atomic Transactions: Class seat decrementing is handled via PostgreSQL functions to prevent overbooking.
+
+    Admin Protection: Middleware-level protection for all /admin and /kitchen routes.
+```
+
 ---
 
 ## 🎨 Design Philosophy
