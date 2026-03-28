@@ -1,4 +1,5 @@
 import { CartProvider } from '@/context/CartContext';
+import { Analytics } from '@vercel/analytics/react';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -8,22 +9,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Navbar /> {/* Your navbar can now show the "Cart Count" */}
           {children}
         </CartProvider>
-      </body>
-    </html>
-  );
-}
-
-import { Analytics } from '@vercel/analytics/react';
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en">
-      <body>
-        {children}
         <Analytics />
       </body>
     </html>
