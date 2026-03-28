@@ -1,4 +1,4 @@
-// components/BookingButton.tsx
+// BookingButton
 export default function BookingButton({ classId, price }: { classId: string, price: number }) {
   const handleBooking = async () => {
     // 1. Call Stripe Checkout

@@ -3,7 +3,7 @@ import { stripe } from '@/lib/stripe'; // Importing the utility we just created
 
 export async function POST(req: Request) {
   try {
-    const { items, type, classId, pickupDate, inscription } = await req.json();
+    const { items, type, classId, pickupDate, inscription, userId } = await req.json();
 
     // 1. Map your local cart items to Stripe's format
     const line_items = items.map((item: any) => ({

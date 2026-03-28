@@ -19,7 +19,7 @@ export const OrderConfirmationEmail = ({ customerName, items, orderId }) => (
         
         <Text style={{ fontSize: '14px', color: '#888' }}>
           Show this email at the counter for pickup. 
-          Address: 123 Pastry Lane, Sweet City.
+          Address: Adjacent De-Jab Electricals, Kasoa.
         </Text>
       </Container>
     </Body>

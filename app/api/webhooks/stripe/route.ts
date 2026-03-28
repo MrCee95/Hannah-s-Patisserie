@@ -1,9 +1,13 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { createClient } from '@supabase/supabase-js'; // Or your DB of choice
+import { createClient } from '@supabase/supabase-js'; 
+import { Resend } from 'resend';
+import { OrderConfirmationEmail } from '@/emails/OrderConfirmation';
+
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2023-10-16' });
 const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!);
+const resend = new Resend(process.env.RESEND_API_KEY!)
 
 export async function POST(req: Request) {
   const payload = await req.text();
@@ -48,23 +52,6 @@ async function handleStoreOrder(session: any) {
   console.log("Processing Pastry Order for:", session.customer_details.email);
 }
 
-
-import { NextResponse } from 'next/server';
-import Stripe from 'stripe';
-import { createClient } from '@supabase/supabase-js';
-import { Resend } from 'resend';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2023-10-16' });
-const resend = new Resend(process.env.RESEND_API_KEY);
-const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!);
-
-export async function POST(req: Request) {
-  const payload = await req.text();
-  const sig = req.headers.get('stripe-signature')!;
-
-  try {
-    const event = stripe.webhooks.constructEvent(payload, sig, process.env.STRIPE_WEBHOOK_SECRET!);
-
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object as any;
       const { type, classId } = session.metadata;
@@ -95,10 +82,6 @@ export async function POST(req: Request) {
   }
 }
 
-
-import { Resend } from 'resend';
-import { OrderConfirmationEmail } from '@/emails/OrderConfirmation';
-
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function handleStoreOrder(session: any) {
@@ -108,7 +91,7 @@ async function handleStoreOrder(session: any) {
   
   // 2. Send the email
   await resend.emails.send({
-    from: 'Shop <orders@yourbakery.com>',
+    from: 'Shop <orders@hannahsPatisserie.com>',
     to: email,
     subject: 'Your Pastry Order is Confirmed!',
     react: OrderConfirmationEmail({ customerName, items: session.line_items, orderId: session.id }),
